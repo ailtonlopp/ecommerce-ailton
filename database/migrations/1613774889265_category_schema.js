@@ -5,7 +5,7 @@ const Schema = use('Schema')
 
 class CategorySchema extends Schema {
   up () {
-    this.create('categories', (table) => {
+    this.create('categories', table => {
       table.increments()
       table.string('title', 100)
       table.string('description', 255)
@@ -13,7 +13,11 @@ class CategorySchema extends Schema {
 
       table.timestamps()
 
-      table.foreign('image_id').references('id').inTable('images').Ondelete('cascade')
+      table
+      .foreign('image_id')
+      .references('id')
+      .inTable('images')
+      .onDelete('cascade')
     })
   }
 
