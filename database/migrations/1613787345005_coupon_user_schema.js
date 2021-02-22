@@ -4,28 +4,27 @@
 const Schema = use('Schema')
 
 class CouponUserSchema extends Schema {
-  up () {
-    this.create('coupon_user', (table) => {
+  up() {
+    this.create('coupon_user', table => {
       table.increments()
       table.integer('coupon_id').unsigned()
       table.integer('user_id').unsigned()
       table.timestamps()
 
       table
-      .foreign('coupon_id')
-      .references('id')
-      .inTable('coupons')
-      .onDelete('cascade')
-
+        .foreign('coupon_id')
+        .references('id')
+        .inTable('coupons')
+        .onDelete('cascade')
       table
-      .foreign('user_id')
-      .refrences('id')
-      .inTable('users')
-      .onDelete('cascade')
+        .foreign('user_id')
+        .references('id')
+        .inTable('users')
+        .onDelete('cascade')
     })
   }
 
-  down () {
+  down() {
     this.drop('coupon_user')
   }
 }
