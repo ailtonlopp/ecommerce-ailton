@@ -4,18 +4,25 @@
 const Model = use('Model')
 
 class Discount extends Model {
+  static boot() {
+    super.boot()
 
-    static get table(){
-        return 'coupon_order'
-    }
+    this.addHook('beforeSave', 'DiscountHook.calculateValues')
+    this.addHook('afterSave', 'DiscountHook.decrementCoupons')
+    this.addHook('afterDelete', 'DiscountHook.incrementCoupons')
+  }
 
-    order(){
-        return this.belongsTo('App/Models/Order', 'order_id', 'id')
-    }
+  static get table() {
+    return 'coupon_order'
+  }
 
-    coupon(){
-        return this.belongsTo('App/Models/Coupon', 'coupon_id', 'id')
-    }
+  order() {
+    return this.belongsTo('App/Models/Order', 'order_id', 'id')
+  }
+
+  coupon() {
+    return this.belongsTo('App/Models/Coupon', 'coupon_id', 'id')
+  }
 }
 
 module.exports = Discount
