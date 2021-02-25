@@ -9,9 +9,9 @@ class CouponOrderSchema extends Schema {
       table.increments()
       table.integer('coupon_id').unsigned()
       table.integer('order_id').unsigned()
-      table.float('discount', 12, 2).defaultTo(0.0)
+      table.decimal('discount', 12, 2).defaultTo(0.0)
+      table.timestamps()
 
-      // FKs
       table
         .foreign('coupon_id')
         .references('id')

@@ -8,7 +8,6 @@ class CouponSchema extends Schema {
     this.create('coupons', table => {
       table.increments()
       table.string('code', 100).notNullable()
-      table.decimal('discount', 12, 2).notNullable()
       table.dateTime('valid_from')
       table.dateTime('valid_until')
       table.integer('quantity').defaultTo(1)
@@ -16,7 +15,6 @@ class CouponSchema extends Schema {
 
       table.enu('type', ['free', 'percent', 'currency']).defaultTo('currency')
       table.boolean('recursive').defaultTo(false)
-
       table.timestamps()
     })
   }
